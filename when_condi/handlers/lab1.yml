@@ -1,0 +1,13 @@
+- hosts: mydc
+  become: yes
+  tasks:
+  - name: installing the apache webserver
+    apt: name=apache2 state=present
+
+  - name: copy the website file
+    copy: src=obaiah dest=/opt/
+    notify:
+      - Apache Restart
+  handlers:
+  - name: Apache Restart
+    service: name=apache2 state=restartedi
