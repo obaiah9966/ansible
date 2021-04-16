@@ -1,0 +1,14 @@
+- hosts: mydc
+  become: yes
+  tasks:
+  - name: installing the apache webserver
+    apt: 
+      name: apache2 
+      state: absent
+    when: ansible_os_family == "Debian"
+
+  - name: Installing the httpd server
+    yum: 
+      name: httpd 
+      state: latest
+    when: ansible_os_family == "RedHat"
